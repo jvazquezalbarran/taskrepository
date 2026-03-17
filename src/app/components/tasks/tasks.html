@@ -1,0 +1,21 @@
+<div class="tasks-container">
+  <h2>Lista de Tareas</h2>
+
+  <div class="input-group">
+    <input [(ngModel)]="title" placeholder="Nueva tarea" />
+    <button (click)="add()">Agregar</button>
+  </div>
+
+  <!-- Renderiza lista solo si hay datos -->
+  <ul *ngIf="tasks.length > 0; else noTasks">
+    <li *ngFor="let t of tasks">
+      <input type="checkbox" [(ngModel)]="t.isCompleted" (change)="toggleComplete(t)" />
+      <span [class.completed]="t.isCompleted">{{ t.title }}</span>
+      <button (click)="delete(t)">Eliminar</button>
+    </li>
+  </ul>
+
+  <ng-template #noTasks>
+    <p>No hay tareas disponibles</p>
+  </ng-template>
+</div>
